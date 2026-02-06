@@ -1,0 +1,2428 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CY的暴富算法</title>
+    <style>
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "微软雅黑", "PingFang SC", sans-serif;
+    transition: all 0.3s ease;
+}
+body {
+    background: url('https://files.imagetourl.net/uploads/1766590822156-ac86b27a-1868-4085-9543-b97db5245e65.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    padding: 5px;
+    position: relative;
+    max-width: 480px;
+    margin: 0 auto;
+}
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.85);
+    z-index: -1;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 20px;
+    padding: 16px;
+    box-shadow: 0 8px 24px rgba(236, 72, 153, 0.12);
+    margin: 8px;
+    border: 1px solid #fce4ec;
+}
+
+.main-title {
+    background: linear-gradient(135deg, #ec4899, #8b5cf6);
+    color: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    font-size: 18px;
+    margin-bottom: 16px;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 6px 16px rgba(139, 92, 246, 0.25);
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.algorithm-select-section {
+    margin-bottom: 16px;
+    padding: 16px;
+    background: #fdf2f8;
+    border-radius: 16px;
+    border-left: 4px solid #ec4899;
+    animation: fadeIn 0.5s ease;
+}
+.select-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.select-icon {
+    font-size: 20px;
+    margin-right: 10px;
+    color: #ec4899;
+}
+.select-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2d3748;
+}
+.algorithm-select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #fce4ec;
+    border-radius: 12px;
+    font-size: 14px;
+    background: white;
+    color: #333;
+    font-weight: 500;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ec4899' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 18px;
+}
+.algorithm-select:focus {
+    outline: none;
+    border-color-color: #ec4899;
+    box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.15);
+}
+
+.type-select-section {
+    margin-bottom: 16px;
+    padding: 16px;
+    background: #f0f9ff;
+    border-radius: 16px;
+    border-left: 4px solid #3b82f6;
+    animation: fadeIn 0.5s ease 0.1s both;
+}
+.type-select-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.type-select-icon {
+    font-size: 20px;
+    margin-right: 10px;
+    color: #3b82f6;
+}
+.type-select-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2d3748;
+}
+.type-select {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #bae6fd;
+    border-radius: 12px;
+    font-size: 14px;
+    background: white;
+    color: #333;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233b82f6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 18px;
+}
+.type-select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+}
+
+.current-algo-display {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 2px solid #f0e7ff;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.08);
+    animation: fadeIn 0.5s ease 0.2s both;
+}
+.current-algo-title {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.current-algo-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 10px;
+}
+.confidence-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    color: white;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    box-shadow: 0 2px 6px rgba(236, 72, 153, 0.2);
+}
+.accuracy-display {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+.accuracy-label {
+    font-size: 13px;
+    color: #666;
+}
+.accuracy-value {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ec4899;
+}
+
+.smart-prediction-card {
+    background: white;
+    border-radius: 20px;
+    padding: 0;
+    margin-bottom: 20px;
+    border: 1px solid #fce4ec;
+    box-shadow: 0 8px 24px rgba(139, 92, 246, 0.1);
+    overflow: hidden;
+    animation: slideUp 0.6s ease;
+}
+
+.smart-prediction-header {
+    background: linear-gradient(135deg, #8b5cf6, #ec4899);
+    color: white;
+    border-radius: 20px 20px 0 0;
+    padding: 16px 20px;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(139, 92, 246, 0.2);
+}
+
+.smart-prediction-content {
+    padding: 20px;
+}
+
+.prediction-line {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #fef7fb;
+}
+
+.prediction-line:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.prediction-label {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.prediction-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.prediction-combo {
+    color: #059669;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(5, 150, 105, 0.1);
+    animation: pulse 2s infinite;
+}
+
+.kill-group {
+    color: #dc2626;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(220, 38, 38, 0.1);
+}
+
+/* cy算法专用显示区域 */
+.buyvegetables-result {
+    background: #fdf2f8;
+    border: 2px solid #ec4899;
+    border-radius: 16px;
+    padding: 20px;
+    margin-top: 20px;
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.buyvegetables-title {
+    font-weight: 700;
+    font-size: 16px;
+    color: #be185d;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.buyvegetables-combo {
+    font-size: 22px;
+    font-weight: 700;
+    color: #059669;
+    text-align: center;
+    margin: 15px 0;
+    padding: 16px;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #10b981;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+    animation: pulse 2s infinite;
+}
+
+/* 特码推荐区域 */
+.special-code-section {
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-radius: 16px;
+    padding: 20px;
+    margin-top: 20px;
+    animation: fadeIn 0.5s ease 0.3s both;
+}
+
+.special-code-title {
+    font-weight: 700;
+    font-size: 16px;
+    color: #0369a1;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.special-codes-display {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.special-code-item {
+    padding: 10px 18px;
+    background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+    border: 2px solid #10b981;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #065f46;
+    box-shadow: 0 4px 8px rgba(16, 185, 129, 0.2);
+    transition: all 0.3s ease;
+    min-width: 60px;
+    text-align: center;
+}
+
+.special-code-item:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(16, 185, 129, 0.3);
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+}
+
+.code-reason {
+    font-size: 14px;
+    color: #475569;
+    line-height: 1.6;
+    padding: 12px;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.code-reason strong {
+    color: #1e293b;
+}
+
+/* 按钮样式 */
+.btn-group {
+    margin-bottom: 16px;
+    display: flex;
+    gap: 12px;
+}
+
+.btn {
+    padding: 14px 20px;
+    border: none;
+    border-radius: 16px;
+    font-size: 15px;
+
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: all 0.6s ease;
+}
+.btn:hover::after {
+    left: 100%;
+}
+.btn-primary {
+    background: linear-gradient(135deg, #ec4899, #8b5cf6);
+    color: white;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(139, 92, 246, 0.4);
+}
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+.btn-secondary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(59, 130, 246, 0.4);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+.btn-success:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(16, 185, 129, 0.4);
+}
+
+.refresh-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 8px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+.refresh-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(180deg);
+}
+
+/* 修改表格样式 */
+.detail-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-top: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: white;
+}
+.detail-table th, .detail-table td {
+    border: 1px solid #f0f0f0;
+    padding: 10px 8px;
+    text-align: center;
+    line-height: 1.5;
+    font-weight: normal;
+}
+.detail-table th {
+    background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+    padding: 12px;
+    color: #0369a1;
+    font-weight: 600;
+}
+
+/* 命中颜色 */
+.hit-color {
+    background: linear-gradient(135deg, #fef7fb, #fce7f3) !important;
+    color: #be185d !important;
+    font-weight: 600;
+}
+
+.detail-container { 
+    width: 100%; 
+    margin-top: 16px;
+    margin-bottom: 12px;
+    animation: fadeIn 0.5s ease 0.4s both;
+}
+
+.rule-info {
+    font-size: 12px;
+    color: #666;
+    line-height: 1.6;
+    padding: 12px;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #f0f0f0;
+    margin-top: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+.rule-highlight {
+    color: #ec4899;
+    font-weight: 600;
+}
+
+/* 胜率统计区域 */
+.stats-section {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 16px;
+    border: 1px solid #f0e7ff;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.08);
+    animation: fadeIn 0.5s ease 0.5s both;
+}
+
+.stats-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stats-icon {
+    font-size: 18px;
+    color: #8b5cf6;
+}
+
+.stats-content {
+    font-size: 18px;
+    color: #ec4899;
+    font-weight: 700;
+}
+
+.stats-detail {
+    font-size: 13px;
+    color: #666;
+    margin-top: 8px;
+}
+
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #fce4ec;
+    border-top: 3px solid #ec4899;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* 弹窗样式 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 24px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 12px 36px rgba(236, 72, 153, 0.25);
+    animation: slideUp 0.4s ease-out;
+    overflow: hidden;
+    border: 1px solid #fce4ec;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    padding: 24px;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    border-bottom: 1px solid #fbbf24;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.modal-body {
+    padding: 24px;
+}
+
+/* 新增强化弹窗样式 */
+.method-select {
+    margin-bottom: 24px;
+}
+
+.method-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 12px;
+}
+
+.method-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.method-option {
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    background: #fdf2f8;
+    border: 2px solid #fce4ec;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.method-option:hover {
+    background: #fef7fb;
+    border-color: #ec4899;
+    transform: translateY(-2px);
+}
+
+.method-option input[type="radio"] {
+    margin-right: 12px;
+    width: 20px;
+    height: 20px;
+    accent-color: #ec4899;
+}
+
+.method-name {
+    font-weight: 600;
+    color: #1e293b;
+    margin-right: 12px;
+    font-size: 15px;
+}
+
+.method-desc {
+    font-size: 13px;
+    color: #64748b;
+}
+
+.analysis-process {
+    background: #f8fafc;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #e2e8f0;
+}
+
+.step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.step:last-child {
+    margin-bottom: 0;
+}
+
+.step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
+    border-radius: 50%;
+    font-size: 14px;
+    font-weight: 600;
+    margin-right: 12px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(59, 130, 246, 0.2);
+}
+
+.step-text {
+    font-size: 14px;
+    color: #475569;
+    line-height: 1.6;
+}
+
+.calculate-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border: none;
+    border-radius: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+.calculate-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: all 0.6s ease;
+}
+.calculate-btn:hover::after {
+    left: 100%;
+}
+.calculate-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(16, 185, 129, 0.3);
+}
+
+.result-display {
+    background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+    border: 2px solid #10b981;
+    border-radius: 16px;
+    padding: 20px;
+    margin-top: 20px;
+    animation: fadeIn 0.5s ease;
+}
+
+.final-result {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.result-label {
+    font-size: 15px;
+    color: #065f46;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.result-groups {
+    font-size: 24px;
+    font-weight: 700;
+    color: #065f46;
+    padding: 16px;
+    background: white;;
+    border-radius: 12px;
+    border: 1px solid #10b981;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+}
+
+.result-explanation {
+    font-size: 14px;
+    color: #047857;
+    text-align: center;
+    line-height: 1.6;
+    padding-top: 12px;
+    border-top: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* 动画定义 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+/* 移动端优化 */
+@media (max-width: 375px) {
+    .btn-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .special-code-item {
+        min-width: 50px;
+        padding: 8px 14px;
+        font-size: 14px;
+    }
+    .main-title {
+        font-size: 16px;
+        padding: 14px 16px;
+    }
+    .smart-prediction-header {
+        font-size: 16px;
+        padding: 14px 16px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="main-title" id="main-title">cy预测模型</div>
+        
+        <div class="algorithm-select-section" id="algorithm-select-section">
+            <div class="select-header">
+                <div class="select-icon">📊</div>
+                <div class="select-title">选择算法</div>
+            </div>
+            <select class="algorithm-select" id="algorithm-select">
+                <option value="classic">无双算法</option>
+                <option value="hotcold">七少算法</option>
+                <option value="dongsnow">如烟分析</option>
+                <option value="wave">冰糖分析</option>
+                <option value="fibo">明皇幽奇</option>
+                <option value="extreme">水上无双</option>
+                <option value="stable">物是人非算法</option>
+                <option value="probability">伍六七算法</option>
+                <option value="trend">美国总统算法</option>
+                <option value="seventyseven">十八代言算法</option>
+                <option value="kacblic">暴龙算法</option>
+                <option value="bayesian" selected>时间算法</option>
+                <option value="markov">明火算法</option>
+                <option value="fourier">阿波罗算法</option>
+                <option value="chaos">封号斗罗算法</option>
+                <option value="buyvegetables">cy算法</option>
+            </select>
+        </div>
+        
+        <!-- 类型选择器 -->
+        <div class="type-select-section" id="type-select-section">
+            <div class="type-select-header">
+                <div class="type-select-icon">🔄</div>
+                <div class="type-select-title">选择匹配类型</div>
+            </div>
+            <select class="type-select" id="type-select">
+                <option value="double" selected>双组模式</option>
+                <option value="kill">杀组合模式</option>
+            </select>
+            <div class="rule-info">
+                <div id="double-rule-info" style="display: block;">
+                    <span class="rule-highlight">双组匹配规则：</span><br>
+                    • 杀小单 → 双组：大单+大双<br>
+                    • 杀大单 → 双组：小双+大双<br>
+                    • 杀小双 → 双组：小单+大单<br>
+                    • 杀大双 → 双组：小单+小双
+                </div>
+                <div id="kill-rule-info" style="display: none;">
+                    <span class="rule-highlight">杀组合匹配规则：</span><br>
+                    • 杀大单 → 大双+小 或 小单+双<br>
+                    • 杀大双 → 大单+小 或 小双+单<br>
+                    • 杀小双 → 小单+大 或 大双+单<br>
+                    • 杀小单 → 小双+大 或 大单+双
+                </div>
+            </div>
+        </div>
+        
+        <div class="smart-prediction-card" id="smart-prediction-card">
+            <div class="smart-prediction-header">
+                <span>🎯 AI预测分析</span>
+                <button class="refresh-btn" id="header-refresh-btn" title="刷新数据">
+                    🔄
+                </button>
+            </div>
+            <div class="smart-prediction-content">
+                <div class="prediction-line">
+                    <div class="prediction-label">下一期</div>
+                    <div class="prediction-value" id="smart-next-period">--</div>
+                </div>
+                
+                <div class="prediction-line">
+                    <div class="prediction-label">预测组合</div>
+                    <div class="prediction-value">
+                        <span class="prediction-combo" id="smart-prediction-combo">--</span>
+                        <span style="margin: 0 15px;">|</span>
+                        <span class="prediction-label">杀组：</span>
+                        <span class="kill-group" id="smart-kill-group">--</span>
+                    </div>
+                </div>
+                
+                <!-- cy算法专用显示区域 -->
+                <div class="buyvegetables-result" id="buyvegetables-result">
+                    <div class="buyvegetables-title">
+                        <span>👍</span>
+                        <span>cy算法预测结果</span>
+                    </div>
+                    <div class="buyvegetables-combo" id="buyvegetables-combo">--</div>
+                </div>
+                
+                <!-- 其他算法特码推荐区域 -->
+                <div class="special-code-section" id="special-code-section">
+                    <div class="special-code-title">
+                        <span>🔢</span>
+                        <span>智能特码推荐（基于预测组合生成）</span>
+                    </div>
+                    
+                    <div class="special-codes-display" id="special-codes-display">
+                        <div class="special-code-item">--</div>
+                        <div class="special-code-item">--</div>
+                        <div class="special-code-item">--</div>
+                        <div class="special-code-item">--</div>
+                        <div class="special-code-item">--</div>
+                    </div>
+                    
+                    <div class="code-reason" id="special-code-reason">
+                        <strong>推荐理由：</strong>
+                        <span id="reason-text">--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="current-algo-display">
+            <div class="current-algo-title">
+                <span>当前使用算法</span>
+                <span class="confidence-badge" id="confidence-badge">--%</span>
+            </div>
+            <div class="current-algo-name" id="current-algo-name">无双算法</div>
+            <div class="accuracy-display">
+                <div class="accuracy-label">算法置信度：</div>
+                <div class="accuracy-value" id="accuracy-value">--%</div>
+            </div>
+        </div>
+
+        <!-- 普通算法按钮组 -->
+        <div class="btn-group" id="normal-btn-group">
+            <button class="btn btn-primary" id="analyze-btn">
+                <span class="loading" id="analyze-loading" style="display:none;"></span>
+                <span id="analyze-text">🔍 开始逐期分析</span>
+            </button>
+            <button class="btn btn-secondary" id="refresh-data-btn">
+                <span class="loading" id="refresh-loading" style="display:none;"></span>
+                <span id="refresh-text">🔄 刷新数据</span>
+            </button>
+            <button class="btn btn-success" id="enhance-double-btn">
+                <span>✨</span>
+                <span id="enhance-text">强化双组</span>
+            </button>
+        </div>
+
+        <!-- cy算法按钮组 -->
+        <div class="btn-group" id="buyvegetables-btn-group" style="display: none;">
+            <button class="btn btn-primary" id="buyvegetables-refresh-btn" style="flex: 1;">
+                <span class="loading" id="bv-refresh-loading" style="display:none;"></span>
+                <span id="bv-refresh-text">🔄 刷新cy算法数据</span>
+            </button>
+        </div>
+
+        <!-- 表格区域（XX算法时不显示） -->
+        <div class="detail-container" id="full-mode-table">
+            <table class="detail-table">
+                <thead>
+                    <tr>
+                        <th>时间</th>
+                        <th>开奖</th>
+                        <th>杀组</th>
+                        <th id="combo-header">双组</th>
+                        <th>判断</th>
+                    </tr>
+                </thead>
+                <tbody id="detail-tbody">
+                    <tr>
+                        <td colspan="5" style="color: #999;">点击分析后展示明细数据</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- 胜率统计区域 -->
+            <div class="stats-section" id="stats-section" style="display: none;">
+                <div class="stats-title">
+                    <span class="stats-icon">📈</span>
+                    <span>胜率统计</span>
+                </div>
+                <div class="stats-content" id="stats-content">--</div>
+                <div class="stats-detail" id="stats-detail">杀中或组中都算中</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==================== 全局变量 ====================
+        let selectedAlgorithm = 'bayesian';
+        let selectedType = 'double';
+        let allLotteryData = [];
+        let detailRecords = [];
+        let totalHitRateStats = initTotalHitRateStats();
+        let killGroupCache = {};
+        let killGroupHistory = { last: '', count: 0 };
+        let dataCache = null;
+        let nextPeriod = 1;
+        const BASE_TIME = new Date('2025-01-01 00:00:00').getTime();
+        const MAX_SAME_KILL = 3;
+        const DISPLAY_COUNT = 20;
+
+        // ==================== 算法名称映射 ====================
+        function getAlgorithmName(algoId) {
+            const names = {
+                'classic': '无双算法',
+                'hotcold': '七少算法',
+                'dongsnow': '如烟分析',
+                'wave': '冰糖分析',
+                'fibo': '明皇幽奇',
+                'extreme': '水上无双',
+                'stable': '物是人非算法',
+                'probability': '伍六七算法',
+                'trend': '美国总统算法',
+                'seventyseven': '十八代言算法',
+                'kacblic': '时间算法',
+                'bayesian': '明火算法',
+                'markov': '阿波罗算法',
+                'fourier': '封号斗罗算法',
+                'chaos': '暴龙算法',
+                'buyvegetables': 'cy算法'
+            };
+            return names[algoId] || algoId;
+        }
+
+        // ==================== 初始化函数 ====================
+        function initTotalHitRateStats() {
+            const stats = {};
+            const algos = [
+                'classic','hotcold','dongsnow','wave','fibo',
+                'extreme','stable','probability','trend','seventyseven',
+                'kacblic','bayesian','markov','fourier','chaos'
+            ];
+            algos.forEach(algo => stats[algo] = { hit: 0, total: 0 });
+            const saved = localStorage.getItem('totalHitRateStats');
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    algos.forEach(algo => {
+                        if (!parsed[algo]) parsed[algo] = { hit: 0, total: 0 };
+                    });
+                    return parsed;
+                } catch(e) {
+                    return stats;
+                }
+            }
+            return stats;
+        }
+
+        // ==================== 算法选择管理 ====================
+        function selectAlgorithmFromDropdown(algoId) {
+            selectedAlgorithm = algoId;
+            killGroupCache = {};
+            killGroupHistory = { last: '', count: 0 };
+            
+            // 显示/隐藏相关区域
+            const bvResult = document.getElementById('buyvegetables-result');
+            const specialCodeSection = document.getElementById('special-code-section');
+            const fullModeTable = document.getElementById('full-mode-table');
+            const normalBtnGroup = document.getElementById('normal-btn-group');
+            const buyvegetablesBtnGroup = document.getElementById('buyvegetables-btn-group');
+            
+            if (algoId === 'buyvegetables') {
+                bvResult.style.display = 'block';
+                specialCodeSection.style.display = 'none';
+                fullModeTable.style.display = 'none';
+                normalBtnGroup.style.display = 'none';
+                buyvegetablesBtnGroup.style.display = 'flex';
+                
+                // 清空原有预测显示
+                document.getElementById('smart-prediction-combo').textContent = '--';
+                document.getElementById('smart-kill-group').textContent = '--';
+                
+                // 直接加载数据并显示cy算法结果
+                loadDataAndShowBuyVegetables();
+            } else {
+                bvResult.style.display = 'none';
+                specialCodeSection.style.display = 'block';
+                fullModeTable.style.display = 'block';
+                normalBtnGroup.style.display = 'flex';
+                buyvegetablesBtnGroup.style.display = 'none';
+            }
+            
+            updateCurrentAlgorithmDisplay(algoId, null);
+            
+            if (detailRecords.length > 0 && algoId !== 'buyvegetables') {
+                analyzeData();
+            }
+        }
+
+        function selectTypeFromDropdown(typeId) {
+    selectedType = typeId;
+    
+    if (typeId === 'double') {
+        document.getElementById('double-rule-info').style.display = 'block';
+        document.getElementById('kill-rule-info').style.display = 'none';
+        document.getElementById('combo-header').textContent = '双组';
+    } else {
+        document.getElementById('double-rule-info').style.display = 'none';
+        document.getElementById('kill-rule-info').style.display = 'block';
+        document.getElementById('combo-header').textContent = '杀组合';
+    }
+    
+    if (detailRecords.length > 0 && selectedAlgorithm !== 'buyvegetables') {
+        analyzeData();
+    }
+}
+
+function updateCurrentAlgorithmDisplay(algoId, rate) {
+    const algoName = getAlgorithmName(algoId);
+    
+    if (algoId === 'buyvegetables') {
+        document.getElementById('current-algo-name').textContent = algoName;
+        document.getElementById('confidence-badge').textContent = '--%';
+        document.getElementById('accuracy-value').textContent = '--%';
+    } else {
+        const stats = totalHitRateStats[algoId] || { hit: 0, total: 0 };
+        const currentRate = rate !== null ? rate : (stats.total > 0 ? Math.round((stats.hit / stats.total) * 100) : 0);
+        
+        document.getElementById('current-algo-name').textContent = algoName;
+        document.getElementById('confidence-badge').textContent = `${currentRate}%`;
+        document.getElementById('accuracy-value').textContent = `${currentRate}%`;
+    }
+}
+
+// ==================== 强化双组功能（三选一模式） ====================
+function showEnhanceDouble() {
+    // 获取当前杀组
+    const killGroup = document.getElementById('smart-kill-group').textContent;
+    
+    if (killGroup === '--' || killGroup === '') {
+        alert('请先进行预测分析，获取杀组信息！');
+        return;
+    }
+    
+    if (allLotteryData.length < 10) {
+        alert('历史数据不足10期，无法进行强化分析！');
+        return;
+    }
+    
+    // 创建弹窗内容
+    const modalContent = `
+        <div class="modal-content">
+            <div class="modal-header">
+                🎯 三选一强化双组
+            </div>
+            <div class="modal-body">
+                <div class="method-select">
+                    <div class="method-title">选择强化方法：</div>
+                    <div class="method-options">
+                        <label class="method-option">
+                            <input type="radio" name="enhance-method" value="algorithm1" checked>
+                            <span class="method-name">算法一</span>
+                            <span class="method-desc"></span>
+                        </label>
+                        <label class="method-option">
+                            <input type="radio" name="enhance-method" value="algorithm2">
+                            <span class="method-name">算法二</span>
+                            <span class="method-desc"></span>
+                        </label>
+                        <label class="method-option">
+                            <input type="radio" name="enhance-method" value="history">
+                            <span class="method-name">历史排除</span>
+                            <span class="method-desc"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="analysis-process">
+                    <div class="step">
+                        <span class="step-number">1</span>
+                        <span class="step-text">算法杀组：<strong>${killGroup}</strong></span>
+                    </div>
+                    <div class="step" id="method-step">
+                        <span class="step-number">2</span>
+                        <span class="step-text">等待选择强化方法...</span>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <span class="step-text">最终双组：<strong id="final-groups">等待计算</strong></span>
+                    </div>
+                </div>
+                
+                <button class="calculate-btn" id="calculate-btn">开始计算</button>
+                
+                <div class="result-display" id="result-display" style="display: none;">
+                    <div class="final-result">
+                        <div class="result-label">推荐购买组合：</div>
+                        <div class="result-groups" id="result-groups"></div>
+                    </div>
+                    <div class="result-explanation" id="result-explanation"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-close-btn" id="modal-close-btn">关闭</button>
+            </div>
+        </div>
+    `;
+    
+    // 显示弹窗
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = modalContent;
+    document.body.appendChild(modal);
+    
+    // 绑定事件
+    setupEnhanceModalEvents(modal, killGroup);
+}
+
+// 设置弹窗事件
+function setupEnhanceModalEvents(modal, killGroup) {
+    // 计算方法选择
+    modal.querySelector('#calculate-btn').addEventListener('click', function() {
+        calculateEnhanceResult(modal, killGroup);
+    });
+    
+    // 方法选择变化
+    const methodRadios = modal.querySelectorAll('input[name="enhance-method"]');
+    methodRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            updateMethodStep(modal, this.value);
+        });
+    });
+    
+    // 初始更新方法步骤
+    const selectedMethod = modal.querySelector('input[name="enhance-method"]:checked').value;
+    updateMethodStep(modal, selectedMethod);
+    
+    // 关闭按钮
+    modal.querySelector('#modal-close-btn').addEventListener('click', function() {
+        document.body.removeChild(modal);
+    });
+    
+    // 点击背景关闭
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            document.body.removeChild(modal);
+        }
+    });
+}
+
+// 更新方法步骤显示
+function updateMethodStep(modal, method) {
+    const methodStep = modal.querySelector('#method-step .step-text');
+    const methodNames = {
+        'algorithm1': '算法一',
+        'algorithm2': '算法二', 
+        'history': '历史排除'
+    };
+    
+    methodStep.innerHTML = `<strong>${methodNames[method]}</strong>（再排除一组）`;
+}
+
+// 计算强化结果
+function calculateEnhanceResult(modal, killGroup) {
+    const selectedMethod = modal.querySelector('input[name="enhance-method"]:checked').value;
+    const recentData = allLotteryData.slice(-10);
+    const recentSums = recentData.map(d => d.sum);
+    const totalSum = recentSums.reduce((a, b) => a + b, 0);
+    
+    let secondKillGroup = '';
+    let explanation = '';
+    
+    // 所有组合
+    const allGroups = ['小双', '小单', '大单', '大双'];
+    const remainingGroups = allGroups.filter(group => group !== killGroup);
+    
+    // 根据选择的方法计算第二杀组
+    if (selectedMethod === 'algorithm1') {
+        // 算法一：总数 ÷ 1.2457
+        const calculation = totalSum / 1.2457;
+        const integerValue = Math.round(calculation);
+        
+        // 判断大小单双
+        const size = integerValue <= 13 ? '小' : '大';
+        const parity = integerValue % 2 === 0 ? '双' : '单';
+        const predictedGroup = size + parity;
+        
+        // 算法一杀组映射
+        const algorithm1KillMap = {
+            '小双': '大单',
+            '小单': '大双', 
+            '大双': '小单',
+            '大单': '小双'
+        };
+        
+        secondKillGroup = algorithm1KillMap[predictedGroup] || '大单';
+        explanation = `算法一计算结果：${predictedGroup} → 排除${secondKillGroup}`;
+        
+    } else if (selectedMethod === 'algorithm2') {
+        // 算法二：总数 ÷ 1.1789 + 2
+        const calculation = (totalSum / 1.1789) + 2;
+        const integerValue = Math.round(calculation);
+        
+        // 判断大小单双
+        const size = integerValue <= 13 ? '小' : '大';
+        const parity = integerValue % 2 === 0 ? '双' : '单';
+        const predictedGroup = size + parity;
+        
+        // 算法二杀组映射
+        const algorithm2KillMap = {
+            '小双': '大单',
+            '小单': '大双', 
+            '大双': '小单',
+            '大单': '小双'
+        };
+        
+        secondKillGroup = algorithm2KillMap[predictedGroup] || '大单';
+        explanation = `算法二计算结果：${predictedGroup} → 排除${secondKillGroup}`;
+        
+    } else if (selectedMethod === 'history') {
+        // 历史排除法：排除最近出现最多的组合
+        const countMap = { '小双': 0, '小单': 0, '大单': 0, '大双': 0 };
+        recentData.forEach(item => {
+            countMap[item.combo] = (countMap[item.combo] || 0) + 1;
+        });
+        
+        // 在剩余组合中找出现最多的排除
+        let maxCount = 0;
+        remainingGroups.forEach(group => {
+            const count = countMap[group] || 0;
+            if (count > maxCount) {
+                maxCount = count;
+                secondKillGroup = group;
+            }
+        });
+        
+        // 如果没有数据，默认排除第一个
+        if (!secondKillGroup && remainingGroups.length > 0) {
+            secondKillGroup = remainingGroups[0];
+        }
+        
+        explanation = `历史排除法：排除近期出现${maxCount}次的${secondKillGroup}`;
+    }
+    
+    // 确保第二杀组在剩余组合中
+    if (!remainingGroups.includes(secondKillGroup)) {
+        secondKillGroup = remainingGroups[0] || '大单';
+    }
+    
+    // 计算最终双组
+    const finalGroups = remainingGroups.filter(group => group !== secondKillGroup);
+    
+    // 更新显示
+    modal.querySelector('#final-groups').textContent = finalGroups.join(' + ');
+    
+    const resultDisplay = modal.querySelector('#result-display');
+    resultDisplay.style.display = 'block';
+    modal.querySelector('#result-groups').textContent = finalGroups.join(' + ');
+    modal.querySelector('#result-explanation').textContent = `排除${killGroup} + 排除${secondKillGroup}，剩余两组为推荐购买组合`;
+    
+    // 滚动到结果
+    resultDisplay.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ==================== cy算法实现 ====================
+function getBuyVegetablesCombo(data) {
+    if (data.length < 4) {
+        return {
+            combo: ['大单', '大双'],
+            error: '数据不足4期'
+        };
+    }
+    
+    try {
+        // 数据按时间顺序排列，最后一条是最新
+        const last4 = data.slice(-4);
+        
+        const period1 = last4[3].sum; // 最新一期
+        const period2 = last4[2].sum; // 第2期
+        const period3 = last4[1].sum; // 第3期
+        const period4 = last4[0].sum; // 最早一期
+        
+        // 计算：(第2+3+4期) - 第1期
+        const sum234 = period2 + period3 + period4;
+        const calc = sum234 - period1;
+        const absCalc = Math.abs(calc);
+        
+        // 十六进制转十进制
+        const decimalValue = parseInt(absCalc.toString(), 16);
+        
+        // 拆分数字
+        const str = decimalValue.toString().padStart(2, '0');
+        const num1 = parseInt(str[0]) || 0;
+        const num2 = parseInt(str[1]) || 0;
+        
+        // 比较大小
+        const smaller = Math.min(num1, num2);
+        const larger = Math.max(num1, num2);
+        
+        // 生成双组
+        const combo1 = (smaller < larger ? '小' : '大') + 
+                      (smaller % 2 === 1 ? '单' : '双');
+        const combo2 = (larger > smaller ? '大' : '小') + 
+                      (larger % 2 === 1 ? '单' : '双');
+        
+        return {
+            combo: [combo1, combo2],
+            error: null
+        };
+        
+    } catch (err) {
+        console.error('cy算法失败:', err);
+        return {
+            combo: ['大单', '大双'],
+            error: '计算错误'
+        };
+    }
+}
+
+// ==================== 加载数据并显示cy算法结果 ====================
+async function loadDataAndShowBuyVegetables() {
+    const btn = document.getElementById('buyvegetables-refresh-btn');
+    const loading = document.getElementById('bv-refresh-loading');
+    const text = document.getElementById('bv-refresh-text');
+    
+    btn.disabled = true;
+    text.textContent = '加载中...';
+    loading.style.display = 'inline-block';
+    
+    try {
+        await fetchAllData();
+        
+        if (allLotteryData.length === 0) {
+            document.getElementById('buyvegetables-combo').textContent = '数据加载失败';
+            return;
+        }
+        
+        const bvResult = getBuyVegetablesCombo(allLotteryData);
+        
+        // 更新显示
+        document.getElementById('smart-next-period').textContent = nextPeriod;
+        document.getElementById('buyvegetables-combo').textContent = bvResult.combo.join(' + ');
+        
+        console.log('cy算法结果:', bvResult.combo.join(' + '));
+        
+    } catch (err) {
+        console.error('cy算法数据加载失败:', err);
+        document.getElementById('buyvegetables-combo').textContent = '数据加载失败';
+    } finally {
+        btn.disabled = false;
+        text.textContent = '🔄 刷新cy算法数据';
+        loading.style.display = 'none';
+    }
+}
+
+// ==================== 匹配规则函数 ====================
+function getDoubleComboFromKillGroup(killGroup) {
+    const fixedRuleMap = {
+        '小单': ['大单', '大双'],
+        '大单': ['小双', '大双'],
+        '小双': ['小单', '大单'],
+        '大双': ['小单', '小双']
+    };
+    return fixedRuleMap[killGroup] || ['大单', '大双'];
+}
+
+function getKillComboFromKillGroup(killGroup) {
+    const killComboMap = {
+        '大单': ['大双+小', '小单+双'],
+        '大双': ['大单+小', '小双+单'],
+        '小双': ['小单+大', '大双+单'],
+        '小单': ['小双+大', '大单+双']
+    };
+    
+    const combos = killComboMap[killGroup] || ['大单+大双'];
+    const randomIndex = Math.floor(Math.random() * combos.length);
+    return [combos[randomIndex]];
+}
+
+function getComboFromKillGroup(killGroup) {
+    if (selectedType === 'double') {
+        return getDoubleComboFromKillGroup(killGroup);
+    } else {
+        return getKillComboFromKillGroup(killGroup);
+    }
+}
+
+// ==================== 数据获取 ====================
+async function fetchAllData() {
+    // 清除缓存，强制重新获取数据
+    dataCache = null;
+    
+    try {
+        const API_URL = "http://dabaisf.com:666/index.php?s=yuce&id=11072";
+        console.log('正在获取数据...');
+        
+        const res = await fetch(API_URL, {
+            mode: 'cors',
+            headers: { 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' }
+        });
+
+        if(!res.ok) throw new Error(`接口请求失败，状态码：${res.status}`);
+        const html = await res.text();
+        const dom = new DOMParser().parseFromString(html, 'text/html');
+        const data = [];
+
+        dom.querySelectorAll('table').forEach(table => {
+            table.querySelectorAll('tr').forEach((row, idx) => {
+                const cells = row.querySelectorAll('td');
+                if (cells.length < 3) return;
+
+                const period = cells[0].textContent.trim();
+                const resultStr = cells[2].textContent.trim();
+                if (!period || !resultStr) return;
+
+                const sum = parseInt(resultStr.split('=').pop() || resultStr);
+                if(isNaN(sum)) return;
+                const size = sum <= 13 ? '小' : '大';
+                const oddEven = sum % 2 === 1 ? '单' : '双';
+                const combo = size + oddEven;
+
+                const num1 = Math.floor(sum / 3);
+                const num2 = Math.floor(sum / 3);
+                const num3 = sum - num1 - num2;
+                const formula = `${num1}+${num2}+${num3}=${sum}`;
+                const time = new Date(BASE_TIME + parseInt(period) * 60 * 1000).toTimeString().slice(0,5);
+
+                data.push({ period, time, formula, combo, sum: sum });
+            });
+        });
+
+        allLotteryData = data.sort((a,b) => a.period.localeCompare(b.period));
+        console.log('解析到数据条数:', allLotteryData.length);
+        
+        if(allLotteryData.length > 0) {
+            nextPeriod = parseInt(allLotteryData[allLotteryData.length-1].period) + 1;
+            console.log('下一期:', nextPeriod);
+        }
+        
+        if(allLotteryData.length === 0) throw new Error("未解析到有效开奖数据");
+        
+        dataCache = allLotteryData;
+        return allLotteryData;
+        
+    } catch (err) {
+        console.error('数据获取失败:', err);
+        allLotteryData = [];
+        nextPeriod = 1;
+        return allLotteryData;
+    }
+}
+
+// ==================== 特码推荐功能 ====================
+function generateSpecialCodes(predictionCombos, historyData) {
+    const codeMap = {
+        '大单': [13, 15, 17, 19, 21, 23, 25, 27],
+        '小单': [1, 3, 5, 7, 9, 11],
+        '大双': [14, 16, 18, 20, 22, 24, 26],
+        '小双': [2, 4, 6, 8, 10, 12]
+    };
+    
+    let allCodes = [];
+    let reasons = [];
+    
+    predictionCombos.forEach(combo => {
+        if (codeMap[combo]) {
+            const comboCodes = codeMap[combo];
+            allCodes = allCodes.concat(comboCodes);
+            reasons.push(`从${combo}组合选择核心号码`);
+        }
+    });
+    
+    let selectedCodes = [...new Set(allCodes)].sort((a, b) => a - b);
+    
+    if (selectedCodes.length > 5) {
+        const recentData = historyData.slice(0, Math.min(10, historyData.length));
+        const recentSums = recentData.map(d => d.sum);
+        const avgSum = recentSums.length > 0 ? 
+            recentSums.reduce((a, b) => a + b, 0) / recentSums.length : 13.5;
+        
+        if (avgSum > 16) {
+            selectedCodes = selectedCodes.filter(code => code >= 14);
+            reasons.push('基于近期大和值趋势，优选大号码');
+        } else if (avgSum < 11) {
+            selectedCodes = selectedCodes.filter(code => code <= 12);
+            reasons.push('基于近期小和值趋势，优选小号码');
+        } else {
+            const smallCodes = selectedCodes.filter(code => code <= 13);
+            const bigCodes = selectedCodes.filter(code => code >= 14);
+            
+            let balancedCodes = [];
+            if (smallCodes.length > 0 && bigCodes.length > 0) {
+                balancedCodes = [
+                    ...smallCodes.slice(0, 3),
+                    ...bigCodes.slice(0, 2)
+                ];
+            } else {
+                balancedCodes = selectedCodes.slice(0, 5);
+            }
+            
+            selectedCodes = balancedCodes;
+            reasons.push('基于平衡分布原则选择号码');
+        }
+    }
+    
+    selectedCodes = selectedCodes.slice(0, 5);
+    
+    if (selectedCodes.length < 5) {
+        const defaultCodes = [2, 4, 6, 8, 10];
+        const needed = 5 - selectedCodes.length;
+        const supplement = defaultCodes.filter(code => !selectedCodes.includes(code)).slice(0, needed);
+        selectedCodes = [...selectedCodes, ...supplement];
+        if (supplement.length > 0) {
+            reasons.push('补充系统推荐号码');
+        }
+    }
+    
+    return {
+        codes: selectedCodes,
+        reasons: reasons.join('；')
+    };
+}
+
+// ==================== 77算法 ====================
+function getSeventySevenKillGroup(data) {
+    if (data.length < 2) return '小单';
+    
+    const last2 = data.slice(-2);
+    let sum = 0;
+    last2.forEach(item => {
+        const formula = item.formula;
+        const numbersPart = formula.split('=')[0];
+        const numbers = numbersPart.split('+').map(n => parseFloat(n));
+        
+        if (numbers.length === 3) {
+            const value = (numbers[0] + numbers[1]) / 2 + numbers[2] / 3;
+            sum += value;
+        }
+    });
+    
+    const size = sum <= 13.5 ? '小' : '大';
+    const oddEven = Math.round(sum) % 2 === 1 ? '单' : '双';
+    const predictedCombo = size + oddEven;
+    
+    const killMap = {
+        '小双': '大单',
+        '小单': '大双',
+        '大双': '小单',
+        '大单': '小双'
+    };
+    
+    return killMap[predictedCombo] || '小单';
+}
+
+// ==================== 期号算法 ====================
+async function getKacblicKillGroup(currentPeriod) {
+    try {
+        const currentIndex = allLotteryData.findIndex(item => item.period === currentPeriod);
+        if (currentIndex <= 0) return '小双';
+        
+        const prevData1 = allLotteryData[currentIndex - 1];
+        const prevData2 = currentIndex >= 2 ? allLotteryData[currentIndex - 2] : prevData1;
+        const prevData3 = currentIndex >= 3 ? allLotteryData[currentIndex - 3] : prevData2;
+        
+        const prevPeriod = prevData1.period;
+        const prevSum = prevData1.sum;
+        const prevSum2 = prevData2.sum;
+        const prevSum3 = prevData3.sum;
+        
+        let periodSum = 0;
+        for (let i = 0; i < prevPeriod.length; i++) {
+            const digit = parseInt(prevPeriod[i]);
+            if (!isNaN(digit)) {
+                periodSum += digit;
+                if ((i + 1) % 2 === 1) periodSum += 1;
+            }
+        }
+        
+        const lastDigit = prevSum % 10;
+        const lastDigit2 = prevSum2 % 10;
+        
+        let result = (periodSum * 1.6) - (lastDigit * 2) + (lastDigit2 * 1);
+        
+        if (currentIndex >= 3) {
+            const recentSum1 = prevSum;
+            const recentSum2 = prevSum2;
+            const recentSum3 = prevSum3;
+            
+            const trend1 = recentSum1 - recentSum2;
+            const trend2 = recentSum2 - recentSum3;
+            
+            if (trend1 > 0 && trend2 > 0) result += 3;
+            else if (trend1 < 0 && trend2 < 0) result -= 3;
+            
+            const avgSum = (recentSum1 + recentSum2 + recentSum3) / 3;
+            
+            if (avgSum > 17) result += 2;
+            else if (avgSum < 10) result -= 2;
+        }
+        
+        const periodNum = parseInt(prevPeriod);
+        if (periodNum % 7 === 0) result += 1;
+        if (periodNum % 10 === 0) result -= 1;
+        
+        if (prevSum % 2 === 0 && prevSum2 % 2 === 0) {
+            result += 1.5;
+        } else if (prevSum % 2 === 1 && prevSum2 % 2 === 1) {
+            result -= 1.5;
+        }
+        
+        if (prevSum <= 13 && prevSum2 <= 13) {
+            result += 1;
+        } else if (prevSum > 13 && prevSum2 > 13) {
+            result -= 1;
+        }
+        
+        result = Math.abs(result % 28);
+        if (result < 3) result += 4;
+        if (result > 25) result -= 4;
+        
+        const isSmall = result <= 13.5;
+        const isEven = Math.round(result) % 2 === 0;
+        
+        let killGroup;
+        if (isSmall && !isEven) killGroup = '小单';
+        else if (isSmall && isEven) killGroup = '小双';
+        else if (!isSmall && !isEven) killGroup = '大单';
+        else killGroup = '大双';
+        
+        return killGroup;
+        
+    } catch (err) {
+        console.error(`期号算法失败:`, err);
+        return '小双';
+    }
+}
+
+// ==================== 新增四套算法实现 ====================
+function getBayesianKillGroup(data, currentPeriod) {
+    // 原有的叶贝斯算法代码
+    if (data.length < 3) return '小双';
+    
+    const last3 = data.slice(-3);
+    let bayesSum = 0;
+    last3.forEach(item => {
+        bayesSum += item.sum * 0.6;
+    });
+    
+    const adjustment = currentPeriod ? parseInt(currentPeriod.slice(-1)) * 0.2 : 0;
+    const finalValue = (bayesSum / 3) + adjustment;
+    
+    const size = finalValue <= 13.5 ? '小' : '大';
+    const oddEven = Math.round(finalValue) % 2 === 1 ? '单' : '双';
+    const bayesianMap = {
+        '小双': '大单',
+        '小单': '大双',
+        '大双': '小单',
+        '大单': '小双'
+    };
+    
+    return bayesianMap[size + oddEven] || '小双';
+}
+
+function getMarkovKillGroup(data, currentPeriod) {
+    // 原有的马尔科夫算法代码
+    if (data.length < 4) return '小双';
+    
+    const last4 = data.slice(-4);
+    const sums = last4.map(item => item.sum);
+    
+    // 计算转移概率
+    let transitionSum = 0;
+    for (let i = 1; i < sums.length; i++) {
+        transitionSum += sums[i] - sums[i-1];
+    }
+    
+    const avgTransition = transitionSum / (sums.length - 1);
+    const nextSum = sums[sums.length - 1] + avgTransition;
+    
+    const size = nextSum <= 13.5 ? '小' : '大';
+    const oddEven = Math.round(nextSum) % 2 === 1 ? '单' : '双';
+    const markovMap = {
+        '小双': '大单',
+        '小单': '大双',
+        '大双': '小单',
+        '大单': '小双'
+    };
+    
+    return markovMap[size + oddEven] || '小双';
+}
+
+function getFourierKillGroup(data, currentPeriod) {
+    // 原有的傅里叶算法代码
+    if (data.length < 5) return '小双';
+    
+    const recent5 = data.slice(-5);
+    const sums = recent5.map(item => item.sum);
+    
+    // 简单傅里叶变换模拟
+    let fourierValue = 0;
+    for (let i = 0; i < sums.length; i++) {
+        fourierValue += sums[i] * Math.sin((i + 1) * Math.PI / sums.length);
+    }
+    
+    const size = Math.abs(fourierValue) <= 13.5 ? '小' : '大';
+    const oddEven = Math.round(Math.abs(fourierValue)) % 2 === 1 ? '单' : '双';
+    const fourierMap = {
+        '小双': '大单',
+        '小单': '大双',
+        '大双': '小单',
+        '大单': '小双'
+    };
+    
+    return fourierMap[size + oddEven] || '小双';
+}
+
+function getChaosKillGroup(data, currentPeriod) {
+    // 原有的混沌理论算法代码
+    if (data.length < 3) return '小双';
+    
+    const last3 = data.slice(-3);
+    const a = last3[0].sum;
+    const b = last3[1].sum;
+    const c = last3[2].sum;
+    
+    // 逻辑斯蒂映射模拟混沌行为
+    let x = 0.5;
+    const r = 3.7 + (a % 10) * 0.1;
+    
+    for (let i = 0; i < 10; i++) {
+        x = r * x * (1 - x);
+    }
+    
+    const chaosValue = x * 28;
+    const size = chaosValue <= 13.5 ? '小' : '大';
+    const oddEven = Math.round(chaosValue) % 2 === 1 ? '单' : '双';
+    const chaosMap = {
+        '小双': '大单',
+        '小单': '大双',
+        '大双': '小单',
+        '大单': '小双'
+    };
+    
+    return chaosMap[size + oddEven] || '小双';
+}
+
+// ==================== 算法获取杀组（集成所有算法） ====================
+async function getKillGroup(data, currentPeriod) {
+    // 新增cy算法判断
+    if (selectedAlgorithm === 'buyvegetables') {
+        return '--'; // cy算法不需要杀组
+    }
+    
+    if (selectedAlgorithm === 'kacblic') {
+        return await getKacblicKillGroup(currentPeriod);
+    }
+    
+    if (selectedAlgorithm === 'seventyseven') {
+        return getSeventySevenKillGroup(data);
+    }
+    
+    const cacheKey = `${selectedAlgorithm}_${data.length}_${currentPeriod}`;
+    if(killGroupCache[cacheKey]) return killGroupCache[cacheKey];
+
+    if(data.length === 0) {
+        const result = '小双';
+        killGroupCache[cacheKey] = result;
+        return result;
+    }
+
+    let killGroupResult = '';
+
+    switch(selectedAlgorithm) {
+        case 'classic':
+            if (data.length < 3) {
+                killGroupResult = '小双';
+                break;
+            }
+            const last3 = data.slice(-3);
+            const a = last3[0].sum;
+            const b = last3[1].sum;
+            const c = last3[2].sum;
+            
+            const step1 = a * 3 + b * 2 + c;
+            const step2 = step1 / 3;
+            const step3 = step2 * 1.5;
+            const step4 = step3 - 8;
+            
+            const size = step4 <= 13 ? '小' : '大';
+            const oddEven = Math.round(step4) % 2 === 1 ? '单' : '双';
+            const classicMap = {小双:'大单',小单:'大双',大双:'小单',大单:'小双'};
+            killGroupResult = classicMap[size + oddEven];
+            break;
+        
+        case 'hotcold':
+            if (data.length < 2) {
+                killGroupResult = '小双';
+                break;
+            }
+            const hotLast = data.slice(-2);
+            const h1 = hotLast[0].sum;
+            const h2 = hotLast[1].sum;
+            
+            const hStep1 = h1 + h2;
+            const hStep2 = hStep1 * 2;
+            const hStep3 = hStep2 + 5;
+            const hStep4 = hStep3 / 2;
+            const hStep5 = hStep4 * 1.2;
+            const hStep6 = hStep5 - 3;
+            
+            const hSize = hStep6 <= 13 ? '小' : '大';
+            const hOddEven = Math.round(hStep6) % 2 === 1 ? '单' : '双';
+            const hotcoldMap = {小双:'大双',小单:'大单',大双:'小双',大单:'小单'};
+            killGroupResult = hotcoldMap[hSize + hOddEven];
+            break;
+        
+        case 'dongsnow':
+            if (data.length < 4) {
+                killGroupResult = '小双';
+                break;
+            }
+            const dongLast = data.slice(-4);
+            const d1 = dongLast[0].sum;
+            const d2 = dongLast[1].sum;
+            const d3 = dongLast[2].sum;
+            const d4 = dongLast[3].sum;
+            
+            const dStep1 = (d1 + d3) * 2;
+            const dStep2 = (d2 + d4) * 1.5;
+            const dStep3 = (dStep1 + dStep2) / 2;
+            const dStep4 = dStep3 - 7;
+            
+            const dSize = dStep4 <= 13 ? '小' : '大';
+            const dOddEven = Math.round(dStep4) % 2 === 1 ? '单' : '双';
+            const dongsnowMap = {小双:'大单',小单:'大双',大双:'小单',大单:'小双'};
+            killGroupResult = dongsnowMap[dSize + dOddEven];
+            break;
+        
+        case 'wave':
+            if (data.length < 3) {
+                killGroupResult = '小双';
+                break;
+            }
+            const waveLast = data.slice(-3);
+            const w1 = waveLast[0].sum;
+            const w2 = waveLast[1].sum;
+            const w3 = waveLast[2].sum;
+            
+            const wStep1 = (w1 * 0.8) + (w2 * 1.2) + (w3 * 0.5);
+            const wStep2 = wStep1 * 1.3;
+            const wStep3 = wStep2 - 4;
+            
+            const wSize = wStep3 <= 13 ? '小' : '大';
+            const wOddEven = Math.round(wStep3) % 2 === 1 ? '单' : '双';
+            const waveMap = {小双:'小单',小单:'大双',大双:'大单',大单:'小双'};
+            killGroupResult = waveMap[wSize + wOddEven];
+            break;
+        
+        case 'fibo':
+            if (data.length < 2) {
+                killGroupResult = '小双';
+                break;
+            }
+            const fiboLast = data.slice(-2);
+            const f1 = fiboLast[0].sum;
+            const f2 = fiboLast[1].sum;
+            
+            const fiboStep1 = f1 * 1.618 + f2 * 0.618;
+            const fiboStep2 = fiboStep1 / 1.618;
+            const fiboStep3 = fiboStep2 + 2;
+            
+            const fiboSize = fiboStep3 <= 13 ? '小' : '大';
+            const fiboOddEven = Math.round(fiboStep3) % 2 === 1 ? '单' : '双';
+            const fiboMap = {小双:'大双',小单:'小双',大双:'大单',大单:'小单'};
+            killGroupResult = fiboMap[fiboSize + fiboOddEven];
+            break;
+        
+        case 'extreme':
+            if (data.length < 5) {
+                killGroupResult = '小双';
+                break;
+            }
+            const extremeLast = data.slice(-5);
+            const sums = extremeLast.map(item => item.sum);
+            const maxSum = Math.max(...sums);
+            const minSum = Math.min(...sums);
+            
+            const extremeStep1 = (maxSum + minSum) / 2;
+            const extremeStep2 = extremeStep1 * 1.1;
+            
+            const extremeSize = extremeStep2 <= 13 ? '小' : '大';
+            const extremeOddEven = Math.round(extremeStep2) % 2 === 1 ? '单' : '双';
+            const extremeMap = {小双:'大单',小单:'小双',大双:'小单',大单:'大双'};
+            killGroupResult = extremeMap[extremeSize + extremeOddEven];
+            break;
+        
+        case 'stable':
+            if (data.length < 3) {
+                killGroupResult = '小双';
+                break;
+            }
+            const stableLast = data.slice(-3);
+            const s1 = stableLast[0].sum;
+            const s2 = stableLast[1].sum;
+            const s3 = stableLast[2].sum;
+            
+            const stableStep1 = (s1 + s2 + s3) / 3;
+            const stableStep2 = stableStep1 + 1;
+            
+            const stableSize = stableStep2 <= 13 ? '小' : '大';
+            const stableOddEven = Math.round(stableStep2) % 2 === 1 ? '单' : '双';
+            const stableMap = {小双:'小单',小单:'大双',大双:'大单',大单:'小双'};
+            killGroupResult = stableMap[stableSize + stableOddEven];
+            break;
+        
+        case 'probability':
+            if (data.length < 6) {
+                killGroupResult = '小双';
+                break;
+            }
+            const probLast = data.slice(-6);
+            let smallCount = 0;
+            let bigCount = 0;
+            let singleCount = 0;
+            let doubleCount = 0;
+            
+            probLast.forEach(item => {
+                if (item.sum <= 13) smallCount++;
+                else bigCount++;
+                if (item.sum % 2 === 1) singleCount++;
+                else doubleCount++;
+            });
+            
+            const probStep1 = (smallCount - bigCount) * 0.5;
+            const probStep2 = (singleCount - doubleCount) * 0.5;
+            const probStep3 = 14 + probStep1 + probStep2;
+            
+            const probSize = probStep3 <= 13 ? '小' : '大';
+            const probOddEven = Math.round(probStep3) % 2 === 1 ? '单' : '双';
+            const probMap = {小双:'大双',小单:'大单',大双:'小双',大单:'小单'};
+            killGroupResult = probMap[probSize + probOddEven];
+            break;
+        
+        case 'trend':
+            if (data.length < 4) {
+                killGroupResult = '小双';
+                break;
+            }
+            const trendLast = data.slice(-4);
+            const trends = [];
+            for (let i = 1; i < trendLast.length; i++) {
+                trends.push(trendLast[i].sum - trendLast[i-1].sum);
+            }
+            const avgTrend = trends.reduce((a,b) => a + b, 0) / trends.length;
+            const nextPred = trendLast[trendLast.length-1].sum + avgTrend;
+            
+            const trendSize = nextPred <= 13 ? '小' : '大';
+            const trendOddEven = Math.round(nextPred) % 2 === 1 ? '单' : '双';
+            const trendMap = {小双:'大单',小单:'大双',大双:'小单',大单:'小双'};
+            killGroupResult = trendMap[trendSize + trendOddEven];
+            break;
+        
+        case 'bayesian':
+            killGroupResult = getBayesianKillGroup(data, currentPeriod);
+            break;
+            
+        case 'markov':
+            killGroupResult = getMarkovKillGroup(data, currentPeriod);
+            break;
+            
+        case 'fourier':
+            killGroupResult = getFourierKillGroup(data, currentPeriod);
+            break;
+            
+        case 'chaos':
+            killGroupResult = getChaosKillGroup(data, currentPeriod);
+            break;
+        
+        default:
+            killGroupResult = '小双';
+    }
+
+    // 防重复逻辑
+    if (killGroupResult === killGroupHistory.last) {
+        killGroupHistory.count++;
+        if (killGroupHistory.count >= MAX_SAME_KILL) {
+            killGroupResult = killGroupResult === '小双' ? '大单' : 
+                             killGroupResult === '大单' ? '小双' : 
+                             killGroupResult === '小单' ? '大双' : '小单';
+            killGroupHistory.count = 0;
+        }
+    } else {
+        killGroupHistory.count = 1;
+    }
+    killGroupHistory.last = killGroupResult;
+
+    killGroupCache[cacheKey] = killGroupResult;
+    return killGroupResult;
+}
+
+// ==================== 判断结果 ====================
+function judgeResult(actual, killGroup, comboArray) {
+    let isComboHit = false;
+    
+    if (selectedType === 'double') {
+        isComboHit = comboArray.includes(actual);
+    } else {
+        const comboStr = comboArray[0];
+        if (comboStr.includes('+')) {
+            const parts = comboStr.split('+');
+            const fullCombo = parts[0];
+            const partial = parts[1];
+            
+            if (fullCombo === actual) {
+                isComboHit = true;
+            }
+            else if (partial === '大' && actual.includes('大')) {
+                isComboHit = true;
+            }
+            else if (partial === '小' && actual.includes('小')) {
+                isComboHit = true;
+            }
+            else if (partial === '单' && actual.includes('单')) {
+                isComboHit = true;
+            }
+            else if (partial === '双' && actual.includes('双')) {
+                isComboHit = true;
+            }
+        }
+    }
+    
+    const isKillHit = actual !== killGroup;
+    
+    if(isKillHit && isComboHit) return { 
+        text: '中奖', 
+        killClass: 'hit-color',
+        comboClass: 'hit-color',
+        judgeClass: 'hit-color',
+        isHit: true
+    };
+    if(isKillHit) return { 
+        text: '杀组', 
+        killClass: 'hit-color',
+        comboClass: '',
+        judgeClass: 'hit-color',
+        isHit: true
+    };
+    if(isComboHit) return { 
+        text: '中奖', 
+        killClass: '',
+        comboClass: 'hit-color',
+        judgeClass: 'hit-color',
+        isHit: true
+    };
+    return { 
+        text: '不中', 
+        killClass: '',
+        comboClass: '',
+        judgeClass: '',
+        isHit: false
+    };
+}
+
+// ==================== 计算胜率统计 ====================
+function calculateWinRate() {
+    if (detailRecords.length === 0) return null;
+    
+    const total = detailRecords.length;
+    const winCount = detailRecords.filter(r => r.isHit).length;
+    
+    const winRate = (winCount / total) * 100;
+    return {
+        winCount,
+        total,
+        winRate: winRate.toFixed(1)
+    };
+}
+
+// ==================== 更新胜率统计显示 ====================
+function updateStatsDisplay() {
+    const stats = calculateWinRate();
+    const statsSection = document.getElementById('stats-section');
+    
+    if (stats) {
+        statsSection.style.display = 'block';
+        document.getElementById('stats-content').textContent = 
+            `胜率统计：${stats.winCount}/${stats.total} = ${stats.winRate}%`;
+        document.getElementById('stats-detail').textContent = '杀中或组中都算中';
+    } else {
+        statsSection.style.display = 'none';
+    }
+}
+
+// ==================== 分析功能 ====================
+async function analyzeData() {
+    const analyzeBtn = document.getElementById('analyze-btn');
+    const analyzeText = document.getElementById('analyze-text');
+    const analyzeLoading = document.getElementById('analyze-loading');
+    
+    analyzeBtn.disabled = true;
+    analyzeText.textContent = '分析中...';
+    analyzeLoading.style.display = 'inline-block';
+    
+    try {
+        console.log('开始分析数据，算法:', selectedAlgorithm);
+        
+        await fetchAllData();
+        console.log('数据获取完成，共', allLotteryData.length, '条记录');
+        
+        if (selectedAlgorithm === 'buyvegetables') {
+            // xy算法已经在selectAlgorithmFromDropdown中处理
+        } else {
+            // 其他算法：进行逐期分析
+            detailRecords = [];
+            killGroupHistory = { last: '', count: 0 };
+            
+            if (!totalHitRateStats[selectedAlgorithm]) {
+                totalHitRateStats[selectedAlgorithm] = { hit: 0, total: 0 };
+            }
+            
+            for (let i = 0; i < allLotteryData.length; i++) {
+                const current = allLotteryData[i];
+                const history = allLotteryData.slice(0, i);
+                
+                const killGroup = await getKillGroup(history, current.period);
+                const combo = getComboFromKillGroup(killGroup);
+                const judge = judgeResult(current.combo, killGroup, combo);
+                
+                detailRecords.push({
+                    time: current.time,
+                    formula: current.formula,
+                    killGroup: killGroup,
+                    combo: selectedType === 'double' ? combo.join('+') : combo[0],
+                    resultText: judge.text,
+                    killClass: judge.killClass,
+                    comboClass: judge.comboClass,
+                    judgeClass: judge.judgeClass,
+                    isHit: judge.isHit
+                });
+                
+                if (i === allLotteryData.length - 1) {
+                    const nextKillGroup = await getKillGroup(allLotteryData, nextPeriod.toString());
+                    const nextCombo = getComboFromKillGroup(nextKillGroup);
+                    updateOtherAlgorithmDisplay(nextKillGroup, nextCombo, nextPeriod);
+                }
+            }
+            
+            const hitCount = detailRecords.filter(r => r.isHit).length;
+            totalHitRateStats[selectedAlgorithm].total = detailRecords.length;
+            totalHitRateStats[selectedAlgorithm].hit = hitCount;
+            
+            localStorage.setItem('totalHitRateStats', JSON.stringify(totalHitRateStats));
+            
+            const stats = totalHitRateStats[selectedAlgorithm];
+            const hitRate = stats.total > 0 ? Math.round((stats.hit / stats.total) * 100) : 0;
+            updateCurrentAlgorithmDisplay(selectedAlgorithm, hitRate);
+            
+            renderFullDetailTable();
+            updateStatsDisplay();
+        }
+        
+        console.log('分析完成！');
+        
+    } catch (err) {
+        console.error('分析失败:', err);
+        alert(`分析失败：${err.message}`);
+    } finally {
+        analyzeBtn.disabled = false;
+        analyzeText.textContent = '🔍 开始逐期分析';
+        analyzeLoading.style.display = 'none';
+    }
+}
+
+// ==================== 更新其他算法显示 ====================
+function updateOtherAlgorithmDisplay(killGroup, comboArray, period) {
+    document.getElementById('smart-next-period').textContent = period;
+    
+    if (selectedType === 'double') {
+        document.getElementById('smart-prediction-combo').textContent = comboArray.join(' + ');
+    } else {
+        document.getElementById('smart-prediction-combo').textContent = comboArray[0];
+    }
+    
+    document.getElementById('smart-kill-group').textContent = killGroup;
+    
+    // 生成特码推荐
+    let predictionCombosForCodes;
+    if (selectedType === 'double') {
+        predictionCombosForCodes = comboArray;
+    } else {
+        const doubleComboMap = {
+            '小单': ['大单', '大双'],
+            '大单': ['小双', '大双'],
+            '小双': ['小单', '大单'],
+            '大双': ['小单', '小双']
+        };
+        predictionCombosForCodes = doubleComboMap[killGroup] || ['大单', '大双'];
+    }
+    
+    const specialCodes = generateSpecialCodes(predictionCombosForCodes, allLotteryData);
+    
+    const codesDisplay = document.getElementById('special-codes-display');
+    codesDisplay.innerHTML = '';
+    specialCodes.codes.forEach(code => {
+        const codeItem = document.createElement('div');
+        codeItem.className = 'special-code-item';
+        codeItem.textContent = code;
+        codesDisplay.appendChild(codeItem);
+    });
+    
+    document.getElementById('reason-text').textContent = specialCodes.reasons;
+}
+
+// ==================== 渲染完整详情表格 ====================
+function renderFullDetailTable() {
+    const tbody = document.getElementById('detail-tbody');
+    
+    if (detailRecords.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="color: #999;">暂无分析数据</td></tr>';
+        return;
+    }
+
+    const sorted = [...detailRecords].sort((a,b) => b.time.localeCompare(a.time));
+    const displayRecords = sorted.slice(0, DISPLAY_COUNT);
+    
+    let html = '';
+
+    displayRecords.forEach(record => {
+        html += `
+        <tr>
+            <td>${record.time}</td>
+            <td>${record.formula}</td>
+            <td class="${record.killClass}">${record.killGroup}</td>
+            <td class="${record.comboClass}">${record.combo}</td>
+            <td class="${record.judgeClass}">${record.resultText}</td>
+        </tr>
+        `;
+    });
+
+    tbody.innerHTML = html;
+    console.log('表格渲染完成，显示', displayRecords.length, '期数据');
+}
+
+// ==================== 刷新数据功能 ====================
+async function refreshData() {
+    const refreshBtn = document.getElementById('refresh-data-btn');
+    const headerRefreshBtn = document.getElementById('header-refresh-btn');
+    const refreshLoading = document.getElementById('refresh-loading');
+    const refreshText = document.getElementById('refresh-text');
+    
+    refreshBtn.disabled = true;
+    headerRefreshBtn.disabled = true;
+    refreshText.textContent = '刷新中...';
+    refreshLoading.style.display = 'inline-block';
+    
+    try {
+        // 清除缓存，强制重新获取数据
+        dataCache = null;
+        
+        await fetchAllData();
+        console.log('数据刷新完成，共', allLotteryData.length, '条记录');
+        
+        if (selectedAlgorithm === 'buyvegetables') {
+            // 如果是cy算法，重新计算结果
+            await loadDataAndShowBuyVegetables();
+        } else if (detailRecords.length > 0) {
+            // 如果是其他算法，重新分析
+            await analyzeData();
+        }
+        
+        // 显示成功提示
+        const originalText = refreshText.textContent;
+        refreshText.textContent = '刷新成功！';
+        setTimeout(() => {
+            refreshText.textContent = originalText;
+        }, 1000);
+        
+    } catch (err) {
+        console.error('数据刷新失败:', err);
+        refreshText.textContent = '刷新失败';
+        setTimeout(() => {
+            refreshText.textContent = '🔄 刷新数据';
+        }, 1000);
+    } finally {
+        refreshBtn.disabled = false;
+        headerRefreshBtn.disabled = false;
+        refreshText.textContent = '🔄 刷新数据';
+        refreshLoading.style.display = 'none';
+    }
+}
+
+// ==================== 页面初始化 ====================
+window.onload = function() {
+    // 绑定事件
+    document.getElementById('algorithm-select').addEventListener('change', function(e) {
+        selectAlgorithmFromDropdown(e.target.value);
+    });
+    
+    document.getElementById('type-select').addEventListener('change', function(e) {
+        selectTypeFromDropdown(e.target.value);
+    });
+    
+    document.getElementById('analyze-btn').addEventListener('click', function() {
+        analyzeData();
+    });
+    
+    document.getElementById('refresh-data-btn').addEventListener('click', function() {
+        refreshData();
+    });
+    
+    document.getElementById('enhance-double-btn').addEventListener('click', function() {
+        showEnhanceDouble();
+    });
+    
+    document.getElementById('header-refresh-btn').addEventListener('click', function() {
+        refreshData();
+    });
+    
+    document.getElementById('buyvegetables-refresh-btn').addEventListener('click', function() {
+        loadDataAndShowBuyVegetables();
+    });
+    
+    // 弹窗关闭按钮（强化双组弹窗会在showEnhanceDouble中动态创建）
+    
+    // 初始化统计
+    totalHitRateStats = initTotalHitRateStats();
+    document.getElementById('algorithm-select').value = selectedAlgorithm;
+    document.getElementById('type-select').value = selectedType;
+    updateCurrentAlgorithmDisplay(selectedAlgorithm, 0);
+    
+    // 初始显示
+    selectAlgorithmFromDropdown(selectedAlgorithm);
+    
+    console.log('页面初始化完成，所有功能已集成');
+};
+</script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TXDiPCh9eNgRP8RDQSR2xeo7Q4epNwfN7RWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"d1cfa5cc475e492e83c89755e7071077","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+  </html>
